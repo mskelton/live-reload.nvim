@@ -1,8 +1,10 @@
 # live-reload.nvim
 
-Live reload Neovim plugins for easier development!
+Live reload Neovim plugins with ease!
 
-This plugin is very simple and works by clearing `package.loaded`
+This plugin is very simple and works by clearing keys from the `package.loaded`
+table so subsequent calls to require your plugin will not use the cached
+require.
 
 ## Installation
 
@@ -14,21 +16,18 @@ use("mskelton/live-reload.nvim")
 
 ## Usage
 
-Call `setup` to configure the `LiveReload` command.
+Call `setup` to configure the plugin to watch your plugins. The main
+configuration is the `plugins` table which accepts strings or tables describing
+the plugins you want to live reload as well as their path on disk. If you pass
+a string, the directory will be inferred from the `root_dir`, otherwise you can
+pass a `dir` key to the table to specify the directory name.
 
 ```lua
-require('live-reload.nvim').setup()
-```
-
-With the plugin setup, you can now call the `LiveReload` command to begin watching files for changes. By default, this command will watch the current working directory, but it accepts a single argument if you would like to watch an arbitrary directory.
-
-```vim
-" Watch the current working directory
-:LiveReload
-
-" Watch an arbitrary directory
-:LiveReload ~/dev/my-plugin
-
-" Watch the directory of the active buffer
-:LiveReload expand('%:p:h')
+require('live-reload').setup({
+  root_dir = "~/dev",
+  plugins = {
+    "my-plugin",
+    { "other-plugin", dir = "other-plugin.nvim" },
+  },
+})
 ```
