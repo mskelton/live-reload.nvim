@@ -8,10 +8,11 @@ require.
 
 ## Installation
 
-Install with your favorite package manager (`packer` in this example).
+Install with your favorite package manager (e.g. [lazy.nvim](https://github.com/folke/lazy.nvim)).
+
 
 ```lua
-use("mskelton/live-reload.nvim")
+{ "mskelton/live-reload.nvim" }
 ```
 
 ## Usage
