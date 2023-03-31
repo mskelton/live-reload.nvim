@@ -32,7 +32,11 @@ M.setup = function(opts)
 			group = group,
 			pattern = pattern,
 			callback = function()
-				package.loaded[plugin_name] = nil
+				for name in pairs(package.loaded) do
+					if string.sub(name, 1, #plugin_name) == plugin_name then
+						package.loaded[name] = nil
+					end
+				end
 			end,
 		})
 	end
