@@ -27,9 +27,8 @@ M.setup = function(opts)
 			pattern = get_pattern(opts, value)
 		end
 
-		local group = vim.api.nvim_create_augroup(plugin_name .. "-live-reload", {})
 		vim.api.nvim_create_autocmd("BufWritePost", {
-			group = group,
+			group = vim.api.nvim_create_augroup(plugin_name .. "-live-reload", {}),
 			pattern = pattern,
 			callback = function()
 				for name in pairs(package.loaded) do
